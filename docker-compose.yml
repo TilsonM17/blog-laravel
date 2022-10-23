@@ -24,6 +24,14 @@ services:
             - sail
         depends_on:
             - pgsql
+            - queue-work
+    
+    queue-work:
+        restart: always
+        image: ipunktbs/laravel-queue-worker:latest
+        command: php artisan queue:work --queue=default,affect-balance
+        volumes:
+            - '.:/var/www/html'
     pgsql:
         image: 'postgres:14'
         ports:
