@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticlesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::prefix('/post')->group(function () {
+    Route::post('create_post',[ArticlesController::class,'create']);    
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
